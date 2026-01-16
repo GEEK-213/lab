@@ -63,9 +63,15 @@ app.post("/api/ai", async (req, res) => {
       Electricity Usage (kWh): ${electricityUsage}
       Total Waste Volume (kg): ${wasteVolume}
 
-      Based on these inputs, give:
-      1. An eco-friendliness score (0-100)
-      2. Practical suggestions to make the business more eco-friendly and cost-effective
+      Based on these inputs, provide a detailed sustainability report.
+      Start the response STRICTLY with the score in this format:
+      "Score: [0-100]/100"
+
+      Then, provide sections for:
+      ## Executive Summary
+      ## Detailed Analysis
+      ## Actionable Recommendations (prioritized list)
+      ## Estimated Savings
     `;
 
     // Call Gemini AI

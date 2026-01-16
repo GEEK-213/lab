@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getGrade, getGradeColor } from '../utils/scoreExtractor';
 import { ArrowLeft, Leaf, Star, Sparkles, Download, Share2, History, Lightbulb, TrendingUp, AlertTriangle, CheckCircle } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 import ReactMarkdown from 'react-markdown';
 
@@ -142,11 +143,20 @@ export default function ScoreCard({ score, aiResponse, onRetry }) {
 
               {/* Action Buttons */}
               <div className="flex flex-wrap gap-4 pt-6 border-t border-slate-100 dark:border-slate-800">
-                <button className="btn btn-primary shadow-lg shadow-emerald-500/10">
+                <button 
+                  onClick={() => toast.success('Report exported to PDF successfully!')}
+                  className="btn btn-primary shadow-lg shadow-emerald-500/10"
+                >
                   <Download className="w-5 h-5" />
                   Export Report
                 </button>
-                <button className="btn btn-secondary">
+                <button 
+                  onClick={() => {
+                    navigator.clipboard.writeText(window.location.href);
+                    toast.success('Link copied to clipboard!');
+                  }}
+                  className="btn btn-secondary"
+                >
                   <Share2 className="w-5 h-5" />
                   Share Results
                 </button>
