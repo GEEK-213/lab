@@ -17,7 +17,7 @@ export default function App() {
   };
 
   return (
-    <div className="font-display bg-slate-50 dark:bg-slate-950 min-h-screen text-slate-900 dark:text-white transition-colors duration-300 selection:bg-emerald-500 selection:text-white">
+    <div className="min-h-screen">
       <Toaster
         position="top-right"
         toastOptions={{

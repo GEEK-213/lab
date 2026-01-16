@@ -110,18 +110,18 @@ const AuditForm = ({ onResult }) => {
     }
   };
 
-  const inputClasses = "w-full px-5 py-4 rounded-xl border transition-all duration-200 bg-slate-50 dark:bg-slate-900/50 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed";
+  const inputClasses = "input-premium";
   const errorInputClasses = "border-red-300 dark:border-red-800 focus:border-red-500 focus:ring-red-500/20";
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
+    <div className="container-custom py-12 lg:py-20">
       {/* Header */}
       <div className="text-center mb-12 animate-fade-in">
-        <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/5 px-4 py-1.5 text-xs font-bold text-emerald-600 dark:text-emerald-400 mb-6 uppercase tracking-wider">
+        <div className="badge mb-6">
           <Activity className="w-4 h-4" />
           AI-Powered Analysis
         </div>
-        <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-slate-900 dark:text-white">
+        <h2 className="heading-display mb-4" style={{ fontSize: '2.5rem' }}>
           Business Sustainability Audit
         </h2>
         <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-light">
@@ -132,9 +132,9 @@ const AuditForm = ({ onResult }) => {
       {/* Form Card */}
       <div className="relative">
          {/* Decorative Blur */}
-        <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-400 rounded-[2rem] blur opacity-20 dark:opacity-10"></div>
+        <div className="hero-blob bg-emerald-400" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '100%', height: '100%' }} />
         
-        <div className="relative bg-white dark:bg-slate-900 rounded-3xl shadow-xl border border-slate-100 dark:border-slate-800 p-8 sm:p-10 lg:p-12">
+        <div className="relative card-glass p-8 sm:p-10 lg:p-12">
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* Business Description */}
             <div className="space-y-2">
@@ -318,7 +318,7 @@ const AuditForm = ({ onResult }) => {
               <button
                 type="submit"
                 disabled={loading}
-                className="group relative w-full flex items-center justify-center gap-3 h-14 rounded-xl bg-slate-900 dark:bg-emerald-500 text-white font-bold hover:shadow-xl hover:shadow-emerald-500/20 hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 transition-all duration-300"
+                className="btn btn-primary w-full justify-center"
               >
                 {loading ? (
                   <>

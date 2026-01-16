@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { getGrade, getGradeColor } from '../utils/scoreExtractor';
 import { ArrowLeft, Leaf, Star, Sparkles, Download, Share2, History, Lightbulb, TrendingUp, AlertTriangle, CheckCircle } from 'lucide-react';
 
+import ReactMarkdown from 'react-markdown';
+
 export default function ScoreCard({ score, aiResponse, onRetry }) {
   const [animatedScore, setAnimatedScore] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
@@ -10,7 +12,7 @@ export default function ScoreCard({ score, aiResponse, onRetry }) {
     setIsVisible(true);
     // Animate score counting up
     if (score !== null) {
-      const duration = 2000; // 2 seconds
+      const duration = 2000;
       const steps = 60;
       const increment = score / steps;
       let current = 0;
@@ -32,13 +34,6 @@ export default function ScoreCard({ score, aiResponse, onRetry }) {
   if (score === null) return null;
 
   const grade = getGrade(score);
-  // We'll map the legacy grade colors to our new design if needed, or just use dynamic classes
-  const getGradeColorClass = (grade) => {
-      if (grade === 'A') return 'text-emerald-500 bg-emerald-100 dark:bg-emerald-500/20';
-      if (grade === 'B') return 'text-blue-500 bg-blue-100 dark:bg-blue-500/20';
-      if (grade === 'C') return 'text-yellow-500 bg-yellow-100 dark:bg-yellow-500/20';
-      return 'text-red-500 bg-red-100 dark:bg-red-500/20';
-  }
 
   const getScoreMessage = () => {
     if (score >= 85) return "Outstanding! You're leading in sustainability.";
@@ -48,122 +43,119 @@ export default function ScoreCard({ score, aiResponse, onRetry }) {
   };
 
   const getGradient = () => {
-    if (score >= 85) return 'from-emerald-500 to-teal-400';
-    if (score >= 70) return 'from-blue-500 to-cyan-400';
-    if (score >= 50) return 'from-yellow-400 to-orange-400';
-    return 'from-red-500 to-pink-500';
+    if (score >= 85) return 'from-emerald-500 to-teal-500';
+    if (score >= 70) return 'from-blue-500 to-cyan-500';
+    if (score >= 50) return 'from-yellow-400 to-orange-500';
+    return 'from-red-500 to-pink-600';
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
-      {/* Back Button */}
-      <button 
-        onClick={onRetry} 
-        className="group flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-emerald-500 mb-8 transition-colors"
-      >
-        <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-        Start New Audit
-      </button>
+    <div className="container-custom pt-32 pb-12">
+      {/* Top Actions */}
+      <div className="flex justify-between items-center mb-8">
+        <button 
+          onClick={onRetry} 
+          className="group flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-emerald-500 transition-colors"
+        >
+          <div className="p-2 bg-white dark:bg-slate-800 rounded-full border border-slate-200 dark:border-slate-700 shadow-sm group-hover:shadow-md transition-all">
+             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          </div>
+          <span>Start New Audit</span>
+        </button>
+      </div>
 
       {/* Main Card */}
-      <div className={`bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+      <div className={`cursor-default bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-2xl shadow-slate-200/50 dark:shadow-black/50 border border-slate-100 dark:border-slate-800 overflow-hidden transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         
         {/* Score Header with Gradient */}
-        <div className={`relative bg-gradient-to-br ${getGradient()} p-12 text-center overflow-hidden`}>
+        <div className={`relative bg-gradient-to-br ${getGradient()} p-12 lg:p-16 text-center overflow-hidden`}>
           {/* Decorative patterns */}
-          <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0 opacity-20 dark:opacity-30">
              <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-               <path d="M0 100 C 20 0 50 0 100 100 Z" fill="white" />
+               <path d="M0 100 C 20 0 50 0 100 100 Z" fill="currentColor" className="text-white" />
+               <circle cx="90" cy="10" r="20" fill="currentColor" className="text-white/20" />
              </svg>
           </div>
           
-          <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/20 backdrop-blur-md px-4 py-1.5 mb-8 border border-white/20">
+          <div className="relative z-10 flex flex-col items-center">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/20 backdrop-blur-md px-4 py-1.5 mb-8 border border-white/30 shadow-lg">
               <Leaf className="w-4 h-4 text-white" />
               <span className="text-xs font-bold text-white uppercase tracking-wider">Sustainability Score</span>
             </div>
             
-            <div className="flex flex-col items-center justify-center mb-6">
-              <div className="text-8xl lg:text-9xl font-bold text-white tracking-tighter drop-shadow-sm">
+            <div className="flex flex-col items-center justify-center mb-6 scale-110">
+              <div className="heading-display text-white drop-shadow-md tracking-tighter" style={{ fontSize: '7rem', lineHeight: '1' }}>
                 {animatedScore}
               </div>
-              <div className="text-xl font-medium text-white/80 mt-2">out of 100</div>
+              <div className="text-2xl font-medium text-white/90 mt-2"> / 100</div>
             </div>
 
-            <div className={`inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-white text-slate-900 shadow-xl mb-6`}>
+            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-white text-slate-900 shadow-xl mb-6 transform hover:scale-105 transition-transform">
               <Star className="w-5 h-5 fill-current text-yellow-500" />
               <span className="text-lg font-bold">Grade {grade}</span>
             </div>
 
-            <p className="text-white/95 text-xl font-medium max-w-lg mx-auto leading-relaxed">
+            <p className="text-white text-xl font-medium max-w-lg mx-auto leading-relaxed drop-shadow-sm">
               {getScoreMessage()}
             </p>
           </div>
         </div>
 
         {/* Content Section */}
-        <div className="p-8 lg:p-12">
-          <div className="flex items-start gap-4 mb-8">
-            <div className="p-3 rounded-xl bg-emerald-500/10 text-emerald-500">
+        <div className="p-8 lg:p-16">
+          <div className="flex items-start gap-5 mb-10">
+            <div className="p-3.5 rounded-2xl bg-emerald-500/10 text-emerald-500 shadow-sm">
               <Sparkles className="w-8 h-8" />
             </div>
             <div>
-              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-1">
-                AI-Powered Recommendations
+              <h3 className="heading-display text-slate-900 dark:text-white mb-2" style={{ fontSize: '2rem' }}>
+                AI Recommendations
               </h3>
-              <p className="text-slate-500 dark:text-slate-400">
-                Actionable insights tailored to your business metrics.
+              <p className="text-slate-500 dark:text-slate-400 text-lg">
+                Your personalized roadmap to business sustainability.
               </p>
             </div>
           </div>
 
           {aiResponse ? (
-            <div className="space-y-8">
-              <div className="relative p-8 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-700/50">
-                <div className="prose prose-slate dark:prose-invert max-w-none">
-                  <div className="whitespace-pre-wrap leading-relaxed">
+            <div className="space-y-10">
+              <div className="card-glass p-8 lg:p-10 border-0 bg-slate-50/80 dark:bg-slate-800/50">
+                <ReactMarkdown
+                    components={{
+                        h1: ({node, ...props}) => <h1 className="text-3xl font-bold text-slate-900 dark:text-white mt-8 mb-4 border-b pb-2 border-slate-200 dark:border-slate-700" {...props} />,
+                        h2: ({node, ...props}) => <h2 className="text-2xl font-bold text-slate-900 dark:text-white mt-8 mb-4 flex items-center gap-2" {...props} />,
+                        h3: ({node, ...props}) => <h3 className="text-xl font-bold text-emerald-600 dark:text-emerald-400 mt-6 mb-3" {...props} />,
+                        strong: ({node, ...props}) => <strong className="font-bold text-slate-900 dark:text-gray-100" {...props} />,
+                        ul: ({node, ...props}) => <ul className="space-y-3 my-4 pl-1" {...props} />,
+                        li: ({node, ...props}) => (
+                            <li className="flex gap-3 text-slate-700 dark:text-slate-300 leading-relaxed group">
+                                <span className="mt-2 min-w-[6px] h-[6px] rounded-full bg-emerald-500/60 group-hover:bg-emerald-500 transition-colors"></span>
+                                <span className="flex-1">{props.children}</span>
+                            </li>
+                        ),
+                        p: ({node, ...props}) => <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4 text-lg" {...props} />,
+                    }}
+                >
                     {aiResponse}
-                  </div>
-                </div>
+                </ReactMarkdown>
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-wrap gap-4 pt-4 border-t border-slate-100 dark:border-slate-800">
-                <button className="flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-900 dark:bg-emerald-500 text-white font-bold hover:opacity-90 transition-all shadow-lg shadow-slate-900/10">
+              <div className="flex flex-wrap gap-4 pt-6 border-t border-slate-100 dark:border-slate-800">
+                <button className="btn btn-primary shadow-lg shadow-emerald-500/10">
                   <Download className="w-5 h-5" />
                   Export Report
                 </button>
-                <button className="flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-transparent text-slate-700 dark:text-white font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+                <button className="btn btn-secondary">
                   <Share2 className="w-5 h-5" />
                   Share Results
-                </button>
-                <button className="flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-transparent text-slate-700 dark:text-white font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
-                  <History className="w-5 h-5" />
-                  View History
                 </button>
               </div>
             </div>
           ) : (
-            <div className="grid gap-4">
-              <Recommendation
-                title="Reduce Electricity Consumption"
-                desc="Switch to energy-efficient devices and optimize office lighting. Consider LED bulbs and smart thermostats."
-                icon={<TrendingUp className="w-6 h-6" />}
-                priority="high"
-              />
-              <Recommendation
-                title="Cut Down Disposable Items"
-                desc="Replace single-use items with reusable or recyclable alternatives. Invest in quality, long-lasting products."
-                icon={<Leaf className="w-6 h-6" />}
-                priority="medium"
-              />
-               <Recommendation
-                title="Improve Waste Management"
-                desc="Track waste volume and introduce recycling or composting programs. Partner with local recycling facilities."
-                icon={<AlertTriangle className="w-6 h-6" />}
-                priority="high"
-              />
-            </div>
+             <div className="text-center py-12 text-slate-500">
+                No recommendations available.
+             </div>
           )}
         </div>
       </div>

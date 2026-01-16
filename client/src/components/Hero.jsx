@@ -3,20 +3,20 @@ import { ArrowRight, Play, CheckCircle2, Leaf, TrendingUp, ShieldCheck, Activity
 
 export default function Hero({ onStart }) {
   return (
-    <section className="relative flex flex-col justify-center py-20 lg:py-32 overflow-hidden">
+    <section className="hero-section">
       {/* Background Gradients */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-emerald-400/20 blur-[100px] animate-pulse-slow" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-teal-400/10 blur-[120px]" />
+        <div className="hero-blob bg-emerald-400" style={{ top: '-10%', right: '-5%', width: '500px', height: '500px' }} />
+        <div className="hero-blob bg-teal-400" style={{ bottom: '-10%', left: '-10%', width: '600px', height: '600px', animationDelay: '2s' }} />
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
+      <div className="container-custom w-full">
         <div className="flex flex-col lg:flex-row gap-12 lg:items-center lg:gap-20">
           
           {/* Left Content */}
           <div className="flex flex-col gap-8 lg:w-1/2 animate-fade-in lg:pr-4">
             {/* Pill Badge */}
-            <div className="inline-flex w-fit items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5 text-sm font-medium text-emerald-600 dark:text-emerald-400 backdrop-blur-md">
+            <div className="badge">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
@@ -25,9 +25,9 @@ export default function Hero({ onStart }) {
             </div>
 
             {/* Heading */}
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 dark:text-white leading-[1.1]">
+            <h1 className="heading-display">
               Sustainability, <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-400">
+              <span className="text-gradient-primary">
                 Reshaped by AI.
               </span>
             </h1>
@@ -42,13 +42,13 @@ export default function Hero({ onStart }) {
             <div className="flex flex-wrap gap-4 mt-2">
               <button 
                 onClick={onStart}
-                className="group relative inline-flex items-center gap-2 px-8 py-4 bg-slate-900 dark:bg-emerald-500 text-white rounded-full text-base font-semibold hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-300 hover:-translate-y-0.5"
+                className="btn btn-primary group"
               >
                 Start Free Audit
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
               
-              <button className="inline-flex items-center gap-2 px-8 py-4 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-white rounded-full text-base font-semibold hover:bg-slate-50 dark:hover:bg-white/10 transition-all duration-300">
+              <button className="btn btn-secondary">
                 <Play className="w-5 h-5 fill-current" />
                 Watch Demo
               </button>
