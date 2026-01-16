@@ -47,11 +47,7 @@ export default function Hero({ onStart }) {
                 Start Free Audit
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
-              
-              <button className="btn btn-secondary">
-                <Play className="w-5 h-5 fill-current" />
-                Watch Demo
-              </button>
+             
             </div>
 
             {/* Trust Indicators */}

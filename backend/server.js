@@ -15,7 +15,7 @@ if (!GEMINI_KEY) {
 }
 const genAI = new GoogleGenerativeAI(GEMINI_KEY);
 const model = genAI.getGenerativeModel({
-  model: "gemini-2.5-flash",
+  model: "gemini-2.5-flash-lite",
   systemInstruction: `
     You are an AI business consultant focused on sustainability. 
     Your goal is to:

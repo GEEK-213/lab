@@ -29,12 +29,12 @@ export default function Navbar({ setView }) {
             <Leaf className="w-6 h-6 text-white fill-white" />
           </div>
           <span className="text-2xl font-bold tracking-tight">
-            Re<span className="text-emerald-500">New</span>
+            Eco<span className="text-emerald-500">Solutions</span>
           </span>
         </div>
         
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden lg:flex items-center gap-6">
           <button 
             onClick={() => setView('landing')}
             className="nav-link"
@@ -44,7 +44,7 @@ export default function Navbar({ setView }) {
           <button 
             className="nav-link"
           >
-            Features
+            
           </button>
           
           <div className="h-6 w-px bg-slate-200 dark:bg-slate-800 mx-2"></div>
